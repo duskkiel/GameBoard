@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+
+class Hero extends Entity{
+
+    private ArrayList<Treasure> treasures;
+    private String name;
+
+    Hero(String heroName, int x, int y){
+        super(x, y);
+        treasures = new ArrayList<>();
+        name = heroName;
+    }
+
+    String getName() {
+        return name;
+    }
+
+    void attack(Entity entity) {
+        if (entity instanceof Crate){
+            System.out.println("Pat crushed the crate into bits and found " + ((Crate) entity).getTreasure());
+            treasures.add(((Crate) entity).getTreasure());
+        }
+
+        if (entity instanceof Dragon){
+            if (((Dragon) entity).getColor().equals("Golden")){
+                System.out.println("Pat bravely defeated the Golden dragon and came away with gold coins as a prize.");
+                treasures.add(Treasure.Coins);
+            }
+            else{
+                System.out.println("Pat bravely defeated the Red dragon.");
+            }
+        }
+
+    }
+
+    ArrayList<Treasure> getTreasures() {
+        return treasures;
+    }
+
+    @Override
+    public String toString() {
+        return name + " standing at " + position;
+    }
+
+}
