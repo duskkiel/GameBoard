@@ -1,0 +1,112 @@
+import java.util.ArrayList;
+
+class Arena {
+
+    private ArrayList<Entity[]> arena;
+    private Hero hero;
+
+    Arena(int x, int y){
+       arena = new ArrayList<>(x);
+       for (int i = 0; i < x; i++){
+           arena.add(new Entity[y]);
+       }
+    }
+
+    boolean add(Entity e){
+        if (arena.get(e.position.x)[e.position.y] == null){
+            if (e instanceof Hero){
+                if (hero == null) {
+                    hero = (Hero) e;
+                    arena.get(e.position.x)[e.position.y] = e;
+                    System.out.println("Successfully added '" + e.toString() + "' to the game arena.");
+                }
+                else{
+                    System.out.println("Could not add '" + e.toString() + "' because there is already a " +
+                                       "hero in the arena.");
+                }
+            }
+
+            else {
+                arena.get(e.position.x)[e.position.y] = e;
+                System.out.println("Successfully added '" + e.toString() + "' to the game arena.");
+            }
+            return true;
+        }
+
+        else{
+            System.out.println("Could not add '" + e.toString() + "' because another entity is already there.");
+            return false;
+        }
+
+    }
+
+    int getEntityCount(){
+        int entity = 0;
+        for (Entity[] entities : arena) {
+            for (Entity value : entities) {
+                if (value != null) {
+                    entity += 1;
+                }
+
+            }
+        }
+        return entity;
+    }
+
+    int getDragonCount(){
+        int dragon = 0;
+        for (Entity[] entities : arena) {
+            for (Entity value : entities) {
+                if (value instanceof Dragon) {
+                    dragon ++;
+                }
+
+            }
+        }
+        return dragon;
+    }
+
+    int getTreasureCount(Treasure t){
+        int treasure = 0;
+        for (Entity[] entities : arena) {
+            for (Entity value : entities) {
+                if (value instanceof Crate && ((Crate) value).getTreasure() == t) {
+                    treasure += 1;
+                }
+
+            }
+        }
+        return treasure;
+    }
+
+    void moveHero(int x, int y){
+        String heroName = hero.getName();
+        if (arena.get(x)[y] != null){
+            hero.attack(arena.get(x)[y]);
+        }
+        arena.get(x)[y] = hero;
+        arena.get(hero.position.x)[hero.position.y] = null;
+        hero.setPosition(x, y);
+
+        System.out.println(heroName + " moved to " + hero.position);
+    }
+
+    Hero getHero() {
+        return hero;
+    }
+
+    ArrayList<Entity[]> getGrid() {
+        return arena;
+    }
+
+    void reportHero(){
+        String heroName = hero.getName();
+        System.out.println("--- Hero Report for " + heroName + " ---");
+        System.out.println("Position: " + hero.position);
+        System.out.println("Treasures: ");
+        for (int i = 0; i < hero.getTreasures().size(); i++)
+            System.out.println("  " + hero.getTreasures().get(i));
+            System.out.println();
+    }
+
+}
