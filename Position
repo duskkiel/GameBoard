@@ -1,0 +1,16 @@
+class Position {
+
+    public int x;
+    public int y;
+
+    Position(int posX, int posY){
+        x = posX;
+        y = posY;
+   }
+
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
+
+}
