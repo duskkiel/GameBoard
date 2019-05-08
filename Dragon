@@ -1,0 +1,19 @@
+class Dragon extends Entity{
+
+    private String color;
+
+    Dragon(String dragonColor, int x, int y){
+        super(x, y);
+        color = dragonColor;
+    }
+
+    String getColor() {
+        return color;
+    }
+
+    @Override
+    public String toString() {
+        return "The " + color + " dragon breathing fire at " + position;
+    }
+
+}
