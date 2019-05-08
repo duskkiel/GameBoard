@@ -1,0 +1,19 @@
+class Crate extends Entity{
+
+    private Treasure treasure;
+
+    Crate(Treasure t, int x, int y){
+        super(x, y);
+        treasure = t;
+    }
+
+    Treasure getTreasure() {
+        return treasure;
+    }
+
+    @Override
+    public String toString() {
+        return "Crate with " + treasure + " at " + position;
+    }
+
+}
