@@ -1,0 +1,18 @@
+class Entity {
+
+    protected Position position;
+
+    Entity(int x, int y) {
+        position = new Position(x, y);
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    void setPosition(int x, int y) {
+        this.position.x = x;
+        this.position.y = y;
+    }
+
+}
